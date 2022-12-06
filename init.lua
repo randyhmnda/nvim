@@ -1,27 +1,18 @@
 require("plugins")
 
-require("nvterm").setup({
-  terminals = {
-    type_opts = {
-      horizontal = {
-        split_ratio = .5
-      },
-    },
-  },
-})
+local nvterm_c = require("configs.nvterm-c")
+local lualine_c = require("configs.lualine-c")
+local sumneko_lua_c = require("configs.sumneko-lua-c")
+
+require("nvterm").setup(nvterm_c)
 require("nvim-tree").setup()
 require('nvim-autopairs').setup {}
 require('Comment').setup()
-require('lualine').setup({
-  options = {
-    theme = 'ayu_dark'
-  }
-})
+require('lualine').setup(lualine_c)
 require('bufferline').setup()
 
 -- change leader key to <space>
-vim.g.mapleader = " " -- idk if this will works or not, cause i'm still newbie
-
+vim.g.mapleader = " "
 
 vim.keymap.set({ "n", "t" }, "<A-h>", function() require("nvterm.terminal").toggle("horizontal") end)
 vim.keymap.set("n", "<C-n>", "<cmd> NvimTreeToggle <CR>")
@@ -35,18 +26,7 @@ vim.api.nvim_create_autocmd("BufWritePre", { command = "CocCommand prettier.forc
 -- sumneko_lua
 vim.api.nvim_create_autocmd("BufWritePre", { command = "lua vim.lsp.buf.formatting()" })
 
-require("lspconfig")["sumneko_lua"].setup {
-  settings = {
-    Lua = {
-      diagnostics = {
-        globals = { 'vim' } -- prevent 'undefined global vim'
-      },
-      format = {
-        enable = true,
-      },
-    },
-  },
-}
+require("lspconfig")["sumneko_lua"].setup(sumneko_lua_c)
 
 local set = vim.opt
 
