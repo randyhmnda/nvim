@@ -5,4 +5,5 @@ return require("packer").startup(function(use)
   use "NvChad/nvterm"
   use "nvim-tree/nvim-tree.lua"
   use "nvim-tree/nvim-web-devicons"
+  use {"neoclide/coc.nvim", branch = "release"}
 end)
